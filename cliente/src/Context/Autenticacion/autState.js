@@ -25,6 +25,7 @@ const AutState=props=>{
 
     const [state, dispatch]=useReducer(AutReducer,initialState)
 
+    //Validacion de inisio de sesion
     const iniciarSesion =async datos=>{
         try{
             console.log(datos)
@@ -34,10 +35,7 @@ const AutState=props=>{
                 type: LOGIN_EXITOSO,
                 payload: respuesta.data
             })
-            usuarioAutenticado();
-            
-            
-            
+            usuarioAutenticado(); 
 
         }catch (error){
             console.log(error.response.data.msg);
@@ -56,6 +54,7 @@ const AutState=props=>{
         }
     }
 
+    //Autenticacion de usuario
     const usuarioAutenticado=async()=>{
         const token=localStorage.getItem('token')
         
@@ -67,6 +66,7 @@ const AutState=props=>{
             const respuesta=await clienteAxios.get('/api/auth')
 
             cambiarEstado(respuesta.data.usuario._id)
+            
             
             //const resultado=await clienteAxios.put(`/api/usuarios/${respuesta.data.usuario._id}`,{ ingreso: 'no' })
             
@@ -85,37 +85,39 @@ const AutState=props=>{
     }
 
     const cambiarEstado=async(PP)=>{
-
         try {
             const resultado=await clienteAxios.put(`/api/usuarios/${PP}`,{ ingreso: 'no' }) 
         } catch (error) {
             console.log(error)            
         }
-        
-        
     }
 
-    
+    //Ingreso de usuarios
     const inicioUsuairo=async()  =>{  
         try{
             const respuesta=await clienteAxios.get('/api/usuarios')     
-             
-            dispatch({
-                type:INICIO_USER,
-                payload:respuesta.data.usuario.ingreso
-            })
+         
+
+                dispatch({
+                    type:INICIO_USER,
+                    payload:respuesta.data.usuario.ingreso
+                })
+            
+      
             
         }catch(error){
             console.log(error)
         }  
 
     }
-   
+
+    //Restriccion de usuario   
     const restringirUsuario=async()  =>{        
         
         try{
             const respuesta=await clienteAxios.get('/api/auth')
             ID=(respuesta.data.usuario._id)
+            console.log(ID)
 
             const resultado=await clienteAxios.put(`/api/usuarios/${ID}`,{ ingreso: 'si' })
         
@@ -125,6 +127,7 @@ const AutState=props=>{
 
      }
      
+     //Cerrar sesion
      const cerrarSesion=()=>{
         restringirUsuario()
         mostrarGrafica(false)

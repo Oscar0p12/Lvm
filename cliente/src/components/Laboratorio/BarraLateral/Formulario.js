@@ -2,7 +2,7 @@ import React,{useContext} from 'react'
 import styled from '@emotion/styled'
 import LabContext from '../../../Context/LabContext'
 
-
+//Estilos de etiquetas
 const InputR=styled.input`
     margin: 0 1rem;
 `
@@ -15,7 +15,7 @@ margin-bottom: 0rem;
 
 const Formulario=()=>{
 
-
+  //Extraer funcion de visualizacion de practicas
   const LabsContext=useContext(LabContext)
   const {mostrarPracticas}=LabsContext
 

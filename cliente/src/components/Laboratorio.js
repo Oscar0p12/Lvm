@@ -6,20 +6,25 @@ import LabContext from '../Context/LabContext';
 import IdleTimerContainer from './Timer';
 import AutContext from '../Context/Autenticacion/autContext';
 
-const Laboratorio=()=>{
 
+//Pagina principal del laboratorio
+const Laboratorio=()=>{
+    
+    //Obtener grafica
     const LabsContext=useContext(LabContext)
     const {grafica}=LabsContext
 
+    //Extraer datos y funciones de sesion de usuario
     const AutContexts=useContext(AutContext)
     const {cerrarSesion,restringirUsuario}=AutContexts
 
+    //Cerrar sesion, al cerrar pagina
     window.addEventListener("beforeunload",(ev) => 
-    { restringirUsuario()
-    ev.preventDefault();
-    return ev.returnValue = '¿Estas seguro de que quieres salir?';
+    { 
+        restringirUsuario()
+        ev.preventDefault();
+        return ev.returnValue = '¿Estas seguro de que quieres salir?';
     });
-
 
 
     return(

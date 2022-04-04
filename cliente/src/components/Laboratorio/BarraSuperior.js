@@ -4,6 +4,7 @@ import AutContext from '../../Context/Autenticacion/autContext'
 
 const Barra=()=>{
 
+    //Extraer funcion cierre de sesion
     const AutContexts=useContext(AutContext)
     const {cerrarSesion}=AutContexts
     

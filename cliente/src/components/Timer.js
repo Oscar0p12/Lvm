@@ -2,6 +2,8 @@ import React,{useRef, useContext} from "react";
 import IdleTimer from 'react-idle-timer'
 import AutContext from './../Context/Autenticacion/autContext'
 
+
+//Contador para cerrar sesion por inactividad de uso de pagina
 const IdleTimerContainer=()=>{
 
     const AutContexts=useContext(AutContext)
@@ -17,7 +19,7 @@ const IdleTimerContainer=()=>{
 
     return(
         <div>
-            <IdleTimer ref={idleTimerRef} timeout={80000000} onIdle={onIdle}></IdleTimer>
+            <IdleTimer ref={idleTimerRef} timeout={800000} onIdle={onIdle}></IdleTimer>
         </div>
     )
 

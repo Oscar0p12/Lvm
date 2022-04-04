@@ -3,14 +3,14 @@ import LabContext from '../../Context/LabContext';
 import { Line } from 'react-chartjs-2'
 import styled from '@emotion/styled'
 
+//Estilo de grafica
 const Graf=styled.div`
     margin-top:8rem;
     margin-left:3rem;
     margin-right:3rem;
- 
 `
-
-
+var a=0;
+//Parametros de grafica
     const options = {
         scales: {
           yAxes: [
@@ -23,16 +23,20 @@ const Graf=styled.div`
         },
       };
 
-
+let ejeY=[0]
 const Grafica=()=>{   
 
-
+  //Extraer datos de la grafica
   const labsContext=useContext(LabContext);
-  const {datos}=labsContext;
+  const {datos,datos1}=labsContext;
+  
 
-
+  
+  
+ 
+  //Propiedades grafica
   const data={
-    labels: datos,
+    labels: datos1,
     datasets: [
       {
         label: '# Respuesta ',
@@ -46,7 +50,11 @@ const Grafica=()=>{
       },
     ],
   }
-  console.log(datos)
+
+  a=a+0.05;
+  var b=a.toFixed(2);
+  ejeY.push(b);
+
     return( 
       <Graf>
         <Line

@@ -5,23 +5,31 @@ const {validationResult}=require('express-validator')
 
 exports.crearUsuario= async(req,res)=>{
 
-
+    //Valida si hay errores
     const errores=validationResult(req);
     if(!errores.isEmpty()){
         return res.status(400).json({errores:errores.array()})
     }
 
+    //Extrae datos de usuarios
     const {nombre,password,ingreso}=req.body
     
     try{
+
         let usuario;
 
+        //Crea nuevo usuario
         usuario=new Usuario(req.body);
 
+
+        //Encripta el password
         const salt = await bcryptjs.genSalt(10);
         usuario.password= await bcryptjs.hash(password,salt)
+        
+        //Guarda usuario
         await usuario.save(); 
 
+        //Crea y firma el JWT
         const payload = {
             usuario:{
                 id:usuario.id
@@ -79,7 +87,7 @@ exports.actualizarIngreso=async (req,res)=>{
 
 exports.inicioUsuario=async(req,res)=>{
     try{
-        let usuario= await Usuario.findById('61971a02acbd8ffeaef0c387')
+        let usuario= await Usuario.findById('61d73b2728ce3137d1a09e3d')
         res.json({usuario})
     }catch(error){
         console.log(error);

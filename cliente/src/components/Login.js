@@ -6,23 +6,26 @@ import AlertaContext from '../Context/Alertas/alertaContext';
 
 const Login=(props)=>{
 
+    //obtener datos y funciones de inicio de sesion
     const AutContexts=useContext(AutContext)
     const {iniciarSesion,autenticado,mensaje,inicioUsuairo,loginn}=AutContexts
 
+    //Obtener funciones de alertas
     const AlertaContexts=useContext(AlertaContext)
     const {alerta,mostrarAlerta}=AlertaContexts
 
+    //Autenticacion de usuario
     if (loginn===null){
-        inicioUsuairo()}
-    
-    
-        
+        inicioUsuairo()}        
     
     
     useEffect(() => {
+        //Redireccion de Autenticacion de usuario
         if(autenticado){
             props.history.push('/laboratorio')
         }
+
+        //Mostrar mensaje si hay algun error
        if(mensaje){
            mostrarAlerta(mensaje.msg,mensaje.categoria)
        }
@@ -33,12 +36,13 @@ const Login=(props)=>{
 
     }, [mensaje,autenticado,props.history,loginn])
 
-
+    //State de datos de usuario
     const[usuario,guardarUsuario]=useState({
         nombre:'',
         password:''
     })
 
+    //Extraer datos de usuario
     const {nombre,password}=usuario;
 
     const onChange=e=>{
@@ -51,18 +55,19 @@ const Login=(props)=>{
     const onSubmit=e=>{
         e.preventDefault();
         
-        
+        //Validacion de datos
         inicioUsuairo()
         if (loginn==='no'){
         mostrarAlerta('Usuario conectado2','alerta-error')
         return 
         }
  
-
         if (nombre.trim()===''|| password.trim()===''){
           mostrarAlerta('Todos los campos son obligatorios','alerta-error')
           return   
-        }        
+        }       
+
+        //Validar usuario 
         iniciarSesion({nombre,password})
     }
 

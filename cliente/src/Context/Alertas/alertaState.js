@@ -11,6 +11,7 @@ const AlertaState=props=>{
 
     const [state,dispatch]=useReducer(alertaReducer,initialState)
 
+    //Muestra de alertas
     const mostrarAlerta=(msg, categoria)=>{
         dispatch({
             type:MOSTRAR_ALERTA,
@@ -21,6 +22,7 @@ const AlertaState=props=>{
         })
 
 
+        //Ocualtar alerta luego de 5seg
         setTimeout(()=>{
             dispatch({
                 type:OCULTAR_ALERTA

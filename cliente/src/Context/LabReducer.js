@@ -1,4 +1,4 @@
-import { ELECCION_PRACTICA, VALIDAR_DATOS, GRAFICA, DATOS_GRAFICA, ACTIVAR_FORMULARIO } from "../type";
+import { ELECCION_PRACTICA, VALIDAR_DATOS, GRAFICA, DATOS_GRAFICA, ACTIVAR_FORMULARIO,DATOS_GRAFICA1 } from "../type";
 
 export default (state, action)=>{
 
@@ -28,7 +28,13 @@ export default (state, action)=>{
                 ...state,
                 datos:action.payload
             }
-
+        
+        case DATOS_GRAFICA1:
+            return{
+                ...state,
+                datos1:action.payload
+            }
+            
         case ACTIVAR_FORMULARIO:
             return{
                 ...state,

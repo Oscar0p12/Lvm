@@ -4,6 +4,7 @@ const router= express.Router();
 const usuarioController= require('../controllers/usuarioController')
 const auth= require('../middleware/auth')
 
+//Crea un usuario
 router.post('/',
     usuarioController.crearUsuario
 )
